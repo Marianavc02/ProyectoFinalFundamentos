@@ -168,7 +168,6 @@ public class Juego{
        if(valor2=="*"){
         this.matrizExterna[fila1][columna1]=aux1;
         return true;
-       
       }else{
        if(valor1==valor2){
         return true;
