@@ -13,7 +13,7 @@ public class Main {
     Jugador j1=new Jugador("juan");
     Jugador j2=new Jugador("alexa");
     Juego juego = new Juego(tam,j1,j2);
-    juego.imprimirTablero();
+     juego.imprimirTablero();
     juego.imprimirTableroNum();
     juego.ejecutarJuego();
     

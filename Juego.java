@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Collections;
 public class Juego{
-   private String[][]matrizExterna;
-   private String[][]matrizInterna;
-   private int pareja;
-   private Jugador jugador1;
-   private Jugador jugador2;
-   private int tam;
-   
+  private String[][]matrizExterna;
+  private String[][]matrizInterna;
+  private int pareja;
+  private Jugador jugador1;
+  private Jugador jugador2;
+  private int tam;
+  
    
   public Juego(int tam, Jugador jugador1, Jugador jugador2) {
     this.matrizInterna=listaAmatriz(tam);
@@ -115,17 +115,37 @@ public class Juego{
   }
 
   public void ejecutarJuego(){
-    Scanner teclado= new Scanner(System.in);
+    int turno=1;
+    boolean acierto;
     while (this.pareja>0 && calcularPuntaje()) {
-     System.out.println("ingrese el número que desea girar ");
+     if(turno%2==0){
+      System.out.println("es el turno de: "+this.jugador1.getNombre());
+      acierto = seleccionYverifica();
+      if(acierto){
+        this.jugador1.setPuntaje(this.jugador1.getPuntaje()+1);
+      }
+     }else{
+      System.out.println("es el turno de: "+this.jugador2.getNombre());
+      acierto = seleccionYverifica();
+      if(acierto){
+        this.jugador2.setPuntaje(this.jugador2.getPuntaje()+1);
+      }
+     }
+     turno++;
+      System.out.println("el puntaje es:"+"jugador1:"+this.jugador1.getPuntaje()+"jugador2:"+this.jugador2.getPuntaje());
+    }
+  }
+
+  public boolean seleccionYverifica(){
+    Scanner teclado= new Scanner(System.in);
+    System.out.println("ingrese el número que desea girar ");
      int cartaNum= teclado.nextInt();
      int[] coordenada1=buscarCoordenadas(cartaNum);
      System.out.println("ingrese el número que desea girar ");
      cartaNum= teclado.nextInt();
      int[] coordenada2=buscarCoordenadas(cartaNum);
-     girarCartas(coordenada1, coordenada2);
-    }
-    
+     return girarCartas(coordenada1, coordenada2);
+
   }
 
   public boolean girarCartas(int[]cor1,int[]cor2){
@@ -141,12 +161,23 @@ public class Juego{
     this.matrizExterna[fila1][columna1]=valor1;
     this.matrizExterna[fila2][columna2]=valor2;
     imprimirTableroNum();
-    if(valor1==valor2){
-      return true;
+    if(valor1=="*"){
+        this.matrizExterna[fila2][columna2]=aux2;
+        return true;
     }else{
-      this.matrizExterna[fila1][columna1]=aux1;
-      this.matrizExterna[fila2][columna2]=aux2;
-      return false;
+       if(valor2=="*"){
+        this.matrizExterna[fila1][columna1]=aux1;
+        return true;
+       
+      }else{
+       if(valor1==valor2){
+        return true;
+        }else{
+        this.matrizExterna[fila1][columna1]=aux1;
+        this.matrizExterna[fila2][columna2]=aux2;
+        return false;
+        }
+      }
     }
 
   }
