@@ -17,10 +17,8 @@ public class Maquina extends Jugador{
         Random random = new Random();
         int[] numerosAleatorios = new int[2];
         do{
-        numerosAleatorios[0] = random.nextInt(tamanio*tamanio); 
-        System.out.println("pixelito giro el numero: "+numerosAleatorios[0]);
+        numerosAleatorios[0] = random.nextInt(tamanio*tamanio); // Puedes ajustar el rango según tus necesidades
         numerosAleatorios[1] = random.nextInt(tamanio*tamanio);
-        System.out.println("pixelito giro el numero: "+numerosAleatorios[1]);
         }while(this.numerosUsados.contains(numerosAleatorios[0])||this.numerosUsados.contains(numerosAleatorios[1])); 
         return numerosAleatorios;
     }
